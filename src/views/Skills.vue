@@ -1,8 +1,7 @@
 <template>
   <div class="cities">
     <h3>
-      Om du behöver en lista på några populär städer i sverige, då har du kommit
-      helt rätt!
+      This is just a fetch call from an API.
     </h3>
     <dl v-if="cities">
       <div :key="city.uuid" v-for="city in cities">

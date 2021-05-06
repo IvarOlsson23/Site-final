@@ -1,129 +1,62 @@
 <template>
-  <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <div id="main-wrapper">
-      <h1 id="header">Ivar Olsson <br />Practice Project</h1>
+  <div class="home page">
+    <div
+      id="move-around"
+      :style="isClicked ? { 'font-family': 'Quicksand' } : null"
+      @click="toggleIsClicked"
+    >
+      <h1>
+        Hi! I'm Ivar Olsson
+      </h1>
+      <p>
+        I had an argument with my friends on what font we like the most <br />
+        we could not come to an agreement se i'll let you decide. Just click
+      </p>
     </div>
-    <div id="card-wrapper">
-      <div class="cardhel">
-        <b-card
-          title="Projects"
-          img-src="https://picsum.photos/600/300/?image=6"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem"
-          class="mb-2"
-        >
-          <b-card-text> Some quick example text </b-card-text>
-
-          <b-button href="#" class="button" variant="primary"
-            >Go somewhere</b-button
-          >
-        </b-card>
-      </div>
-      <div class="cardhel">
-        <b-card
-          title="Experience"
-          img-src="https://picsum.photos/600/300/?image=20"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem"
-          class="mb-2"
-        >
-          <b-card-text> Some quick example text </b-card-text>
-
-          <b-button href="#" class="button" variant="primary"
-            >Go somewhere</b-button
-          >
-        </b-card>
-      </div>
-
-      <div class="cardhel">
-        <b-card
-          title="Merits"
-          img-src="https://picsum.photos/600/300/?image=38"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style="max-width: 20rem"
-          class="mb-2"
-        >
-          <b-card-text> Some quick example text </b-card-text>
-
-          <b-button href="#" class="button" variant="primary"
-            >Go somewhere</b-button
-          >
-        </b-card>
-      </div>
-    </div>
+    <p class="me-text">
+      Welcome to one of my projects. <br />
+      This is a website purely for practice. This is my playground
+    </p>
   </div>
 </template>
 
 <style scoped>
-#card-wrapper {
-  text-align: center;
-  height: 35em;
-}
-
-.mb-2 {
-  position: relative;
-  width: 300px;
-  height: 230px;
-  margin: 80px 0;
-  margin: 1em;
-  background-color: #e9e7cb;
-}
-
-.mb-2:before,
-.mb-2:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-}
-
-.mb-2:before {
-  bottom: 100%;
-  border-bottom: 80px solid #e9e7cb;
-}
-
-.mb-2:after {
-  top: 100%;
-  width: 0;
-  border-top: 80px solid#e9e7cb;
-}
-
-.button {
-  margin-top: 5em;
-  border: black;
-  background: rgb(51, 51, 51);
-}
-
-#card-wrapper {
-  display: flex;
-  justify-content: center;
-  background: radial-gradient(#252525, #06060c);
-}
-
-#main-wrapper {
-  background-image: url("~@/assets/wrapper.jpg");
-  height: 50vh;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#header {
-  color: rgb(255, 255, 255);
-  font-family: "Amatic SC", cursive;
-}
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+p {
+  color: rgb(211, 212, 212);
+}
+
+h1 {
+  color: beige;
+}
+
+#move-around {
+  margin-top: 8em;
+  /* background-image: url("~@/Border.png"); */
+}
+
+.me-text {
+  margin-top: 3em;
+  font-size: 2em;
+}
+
+.page {
+  width: inherit;
+}
 </style>
 
-
-
-
+<script>
+export default {
+  methods: {
+    toggleIsClicked: function() {
+      this.isClicked = !this.isClicked;
+    },
+  },
+  data() {
+    return {
+      isClicked: false,
+    };
+  },
+};
+</script>

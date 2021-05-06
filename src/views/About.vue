@@ -1,46 +1,52 @@
 <template>
-  <div class="about">
-    <h1>About me</h1>
-    <div class="accordion" role="tablist">
-      <b-card no-body class="mb-1">
-        <b-card-header header-tag="header" class="p-1" role="tab">
-          <b-button block v-b-toggle.accordion-1 variant="info" class="button"
-            >Accordion 1</b-button
-          >
-        </b-card-header>
-        <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
-          <b-card-body>
-            <b-card-text></b-card-text>
-            <b-card-text>{{ text }}</b-card-text>
-          </b-card-body>
-        </b-collapse>
-      </b-card>
+  <div class="page">
+    <div class="about">
+      <section id="about1">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde maxime
+          illum accusamus dolore est quasi exercitationem odit consequuntur.
+          Delectus numquam provident minus officia? Architecto labore sit error
+          numquam? Et, quas?
+        </div>
+      </section>
+      <section id="about2">
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde maxime
+          illum accusamus dolore est quasi exercitationem odit consequuntur.
+          Delectus numquam provident minus officia? Architecto labore sit error
+          numquam? Et, quas?
+        </div>
+      </section>
+    </div>
+    <div id="email-form">
+      <h2>Contact form</h2>
+      <form id="sign-upform" @submit.prevent="processForm">
+        <span v-if="!$v.name.required">Please enter your name</span>
+        <div class="field">
+          <label class="label">Name</label>
+          <input type="text" name="name" class="input" v-model="name" />
+        </div>
 
-      <b-card no-body class="mb-1">
-        <b-card-header header-tag="header" class="p-1" role="tab">
-          <b-button block v-b-toggle.accordion-2 variant="info" class="button"
-            >Accordion 2</b-button
-          >
-        </b-card-header>
-        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
-          <b-card-body>
-            <b-card-text>{{ text }}</b-card-text>
-          </b-card-body>
-        </b-collapse>
-      </b-card>
-
-      <b-card no-body class="mb-1">
-        <b-card-header header-tag="header" class="p-1" role="tab">
-          <b-button block v-b-toggle.accordion-3 variant="info" class="button"
-            >Accordion 3</b-button
-          >
-        </b-card-header>
-        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-          <b-card-body>
-            <b-card-text>{{ text }}</b-card-text>
-          </b-card-body>
-        </b-collapse>
-      </b-card>
+        <div class="field">
+          <label class="label">Email</label>
+          <input
+            type="email"
+            class="input"
+            name="email"
+            v-model="email"
+            @blur="validateEmail"
+          />
+          <p class="help is-danger" v-if="errors.email">
+            Please enter a valid Email adress.
+          </p>
+        </div>
+        <textarea id="complaint-text" rows="3" cols="40" />
+        <div class="field has-text-right">
+          <button type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -48,41 +54,76 @@
 <style scoped>
 .about {
   color: aliceblue;
+  font-size: 1.2em;
+  display: flex;
+  margin-top: 6em;
+  justify-content: center;
 }
 
-.about h1 {
-  margin-top: 5%;
-}
-.accordion {
-  margin-right: 30%;
-  margin-left: 30%;
-  color: rgb(32, 32, 32);
-  border: none;
-  margin-top: 10em;
+#about1 {
+  width: 500px;
+  margin-left: 50px;
 }
 
-.button {
-  background: radial-gradient(#1d1d1d, #06060c);
-  list-style: none;
-  border: none;
+#about2 {
+  width: 500px;
+  margin-left: 50px;
 }
 
-.p-1 {
-  background-color: #0e0e0e;
+#email-form {
+  margin-top: 4em;
+  color: aliceblue;
+}
+
+.page {
+  width: inherit;
 }
 </style>
 
 <script>
+import { maxLength, required, alpha } from "vuelidate/lib/validators";
 export default {
+  name: "Complaints",
   data() {
     return {
-      text: `
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-          richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor
-          brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-          tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
-        `,
+      name: "",
+      email: "",
+      text: "",
+      errors: {
+        name: false,
+        email: false,
+      },
     };
+  },
+  validations: {
+    name: {
+      required,
+    },
+    text: {
+      maxLength: maxLength(200),
+      alpha,
+    },
+  },
+  methods: {
+    //Name-required validation
+    submitComp() {
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
+        alert("Please enter name");
+      }
+    },
+    //Email regular expression valoidator
+    processForm() {
+      alert("Thanks for the kind words... i hope");
+    },
+    validateEmail() {
+      var isValid = this.emailregex(this.email);
+      this.errors.email = !isValid;
+    },
+    emailregex(email) {
+      var re = /^([a-z0-9_\-.])+@([a-z])+\.([a-z]{2,4})$/;
+      return re.test(email);
+    },
   },
 };
 </script>
